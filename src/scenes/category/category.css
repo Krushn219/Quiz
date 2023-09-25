@@ -1,5 +1,4 @@
 .category-list-item {
-    margin-bottom: 16px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
 }
@@ -18,5 +17,20 @@
 }
 
 .css-518kzi-MuiListItemSecondaryAction-root {
-    right: 14% !important;
+    right: 13% !important;
+}
+
+.css-1rv476z-MuiInputBase-input-MuiFilledInput-input{
+    font-size: 16px !important;
+}
+.css-10botns-MuiInputBase-input-MuiFilledInput-input {
+    font-size: 16px !important;
+}
+.css-bj2p8a-MuiPaper-root-MuiCard-root{
+    background-color: transparent !important;
+    background-image: none !important;
+}
+.css-bhp9pd-MuiPaper-root-MuiCard-root{
+    background-color: transparent !important;
+    /* background-image: none !important; */
 }

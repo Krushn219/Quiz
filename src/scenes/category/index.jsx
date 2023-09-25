@@ -3,10 +3,11 @@ import axios from 'axios';
 import { Box, Typography, Paper, List, ListItem, ListItemText, ListItemSecondaryAction, IconButton, Avatar, Button, Grid } from '@mui/material';
 import { Delete as DeleteIcon, Edit as EditIcon } from '@mui/icons-material';
 import "./category.css"
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 const Form = () => {
+  const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
   const apiUrl = 'http://localhost:8000/api/v1/category/all';
 
@@ -27,13 +28,23 @@ const Form = () => {
   }, []);
 
   const handleDeleteCategory = (categoryId) => {
-    // Implement delete category logic here, and update the categories state after deletion
+    axios.delete(`http://localhost:8000/api/v1/category/${categoryId}`)
+      .then((response) => {
+        // Handle the response and provide feedback to the user
+        console.log('Category deleted successfully:', response.data);
+
+        // Update the state by removing the deleted category
+        setCategories((prevCategories) => prevCategories.filter((category) => category._id !== categoryId));
+      })
+      .catch((error) => {
+        console.error('Error deleting category:', error);
+      });
   };
 
   const handleEditCategory = (categoryId) => {
     // Implement edit category logic here
+    navigate(`/edit-category/${categoryId}`);
   };
-
 
   return (
     <Box p={3}>
@@ -78,13 +89,14 @@ const Form = () => {
             </Grid>
           </ListItem>
           {categories.map((category) => (
-            <ListItem key={category.id} className="category-list-item">
+          
+            <ListItem key={category._id} className="category-list-item" sx={{marginBottom: 1}}>
               <Grid container spacing={2}>
                 <Grid item xs={2}>
                   <Avatar src={category.image} alt={category.category} />
                 </Grid>
                 <Grid item xs={4}>
-                  <ListItemText primary={category.category} />
+                  <ListItemText primary={category.category}/>
                 </Grid>
                 <Grid item xs={4}>
                   <ListItemText primary={category.description} />
@@ -94,7 +106,7 @@ const Form = () => {
                     <IconButton
                       edge="end"
                       aria-label="edit"
-                      onClick={() => handleEditCategory(category.id)}
+                      onClick={() => handleEditCategory(category._id)}
                       sx={{
                         backgroundColor: '#4CAF50',
                         color: 'white',
@@ -106,7 +118,7 @@ const Form = () => {
                     <IconButton
                       edge="end"
                       aria-label="delete"
-                      onClick={() => handleDeleteCategory(category.id)}
+                      onClick={() => handleDeleteCategory(category._id)}
                       sx={{
                         backgroundColor: '#F44336',
                         color: 'white',
