@@ -1,0 +1,22 @@
+.category-list-item {
+    margin-bottom: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.category-avatar {
+    width: 64px;
+    height: 64px;
+}
+
+.category-title {
+    margin-left: 10px;
+}
+
+.css-47iiw-MuiTypography-root {
+    font-size: 20px !important;
+}
+
+.css-518kzi-MuiListItemSecondaryAction-root {
+    right: 14% !important;
+}
